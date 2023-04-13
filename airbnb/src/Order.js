@@ -65,7 +65,7 @@ const history = useHistory();
                     1. Review Trip details <IoIosArrowForward style={{color:"rgba(211,211,211)"}} /> 2.Conform And Pay
                 </div>
                 <div className='card'>
-                    <img src={currentBooking.img} alt="" />
+                    {/* <img src={currentBooking.img} alt="" /> */}
                     <div className="card__info">
                         <h2>{currentBooking.title}</h2>
                         <h3>{currentBooking.desc}</h3>

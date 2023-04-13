@@ -43,10 +43,11 @@ function Card({ src, title, full_data , hotel_id }) {
 
               }
 
-              const setFacilitiesCost = (dt) =>{
+              const setFacilitiesCost = (dt , td) =>{
                 console.log(":" , dt)
                 var a  =  dt.split(",")
                 var faci_list = "";
+                var ac_cost =  td == 1 ? 1500 : 750
                 var total_cost  = 0
                 for(let i = 0 ; i < a.length ;  i++)
                 {
@@ -59,7 +60,7 @@ function Card({ src, title, full_data , hotel_id }) {
                         }
                     }
                 }
-                return total_cost
+                return total_cost  + ac_cost
                 
 
               }
@@ -72,7 +73,7 @@ function Card({ src, title, full_data , hotel_id }) {
             <div  className="card__info">
                 <h2>{title == 1 ? "AC Room" : "NON AC ROOM"}</h2>
                 <h4 style={{fontWeight:"bold"}}>{ full_data.facilites_com != null &&  full_data.facilites_com != 'undefined' ?  "Facilities " + setFacilitiesValues(full_data.facilites_com) :  null}</h4>
-                <h4 style={{fontWeight:"bold"}}>{ full_data.facilites_com != null &&  full_data.facilites_com != 'undefined' ?  "Price " + setFacilitiesCost(full_data.facilites_com) :  null}</h4>
+                <h4 style={{fontWeight:"bold"}}>{ full_data.facilites_com != null &&  full_data.facilites_com != 'undefined' ?  "Price " + setFacilitiesCost(full_data.facilites_com ,  full_data.type_id) :  null}</h4>
                 <br></br>
                 <button onClick={()=> history.push(`/bookroom/${full_data.room_id}`,{state: {data  : full_data ,  faci_list : full_data.facilites_com != null &&  full_data.facilites_com != 'undefined' ? setFacilitiesValues(full_data.facilites_com) :  null ,  total_cost :full_data.facilites_com != null &&  full_data.facilites_com != 'undefined' ? setFacilitiesCost(full_data.facilites_com) :  null  }}) }  >Book</button>
                 {/* <h3>{price}</h3> */}
