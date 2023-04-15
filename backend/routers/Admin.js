@@ -102,8 +102,23 @@ router.get("/facilities_for_cust",(req,res)=>{
     })
 })
 
+
+router.get("/rooms_list",(req,res)=>{
+    console.log(req.query)
+    mysqlConnection.query("SELECT * from room where hotel_id = ? ",[req.query.hotel_id] ,(err, rows, fields)=>{
+        if(!err){
+
+            //console.log(rows)
+            res.send(rows);
+        }
+        else{
+            //console.log(err);
+        }
+    })
+})
+
 router.get("/facilities",(req,res)=>{
-    mysqlConnection.query("SELECT * from facilities ",(err, rows, fields)=>{
+    mysqlConnection.query("SELECT * from facilities where hotel_id = ? ",[req.query.hotel_id] ,(err, rows, fields)=>{
         if(!err){
 
             //console.log(rows)
@@ -272,7 +287,8 @@ router.get("/reservations/:id",(req,res)=>{
 })
 
 router.get("/bookings",(req,res)=>{
-    mysqlConnection.query("SELECT * from reservation order by booking_date",(err, rows, fields)=>{
+    // mysqlConnection.query("SELECT * from reservation order by booking_date",(err, rows, fields)=>{
+    mysqlConnection.query("select reservation.r_id , amount , extra_matress , booking_date, start_date , end_date , customer.cust_name , cust_phone , cust_email from reservation inner join customer on reservation.cust_id = customer.cust_id order by r_id;",(err, rows, fields)=>{
         if(!err){
             res.send(rows);
             //console.log(rows)

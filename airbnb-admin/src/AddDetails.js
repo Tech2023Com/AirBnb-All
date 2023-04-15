@@ -96,7 +96,7 @@ var uploadFile = ({target : { files }})=>{
 
 useEffect(()=>{
     async function fetchFacility(){
-        var request = await axios.get(fetchRoomfacilities);
+        var request = await axios.get(fetchRoomfacilities,  {params : {hotel_id  :  state.state.hotel_id}});
        setFacilityDetails(request.data)
     }
         

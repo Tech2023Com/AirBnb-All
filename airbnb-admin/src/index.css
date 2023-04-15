@@ -12,6 +12,13 @@ body {
   
 }
 
+.table-container{
+  margin-top:100px;
+  width: 90%;
+  margin: auto;
+ 
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

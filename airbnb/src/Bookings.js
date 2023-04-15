@@ -95,7 +95,8 @@ function Bookings() {
 				<div className="table-data">{formatDate(end_date)}</div>
 				<div className="table-data">{extra_matress}</div>
 				<div className="table-data">{amount}</div>
-				<div className="table-data">{!(formatDate(start_date) < formatDate(new Date())) ? <button style={{backgroundColor:"#C52184",color:"white",fontWeight:"600px",padding:"3px 8px",border:"none"}} id={[r_id,room_id,booking_date]} onClick={cancelReservation}>Cancel</button> : <button style={{backgroundColor:"#C52184",color:"white",fontWeight:"600px",padding:"3px 8px",border:"none"}}>View</button>}</div>
+				{/* <div className="table-data">{!(formatDate(start_date) < formatDate(new Date())) ? <button style={{backgroundColor:"#C52184",color:"white",fontWeight:"600px",padding:"3px 8px",border:"none"}} id={[r_id,room_id,booking_date]} onClick={cancelReservation}>Cancel</button> : <button style={{backgroundColor:"#C52184",color:"white",fontWeight:"600px",padding:"3px 8px",border:"none"}}>View</button>}</div> */}
+				<div className="table-data"><button style={{backgroundColor:"#C52184",color:"white",fontWeight:"600px",padding:"3px 8px",border:"none"}} id={[r_id,room_id,booking_date]} onClick={cancelReservation}>Cancel</button> </div>
 
 				
                 </div>

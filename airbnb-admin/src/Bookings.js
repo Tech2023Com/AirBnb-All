@@ -11,7 +11,20 @@ import axios from "axios"
 import { useStateValue } from './StateProvider';
 import { Link, useHistory } from "react-router-dom";
 
+import tableIcons from './Config/IconsFile'
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
+import MaterialTable from 'material-table';
+import {ThemeProvider , createTheme} from '@mui/material'
+
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 function Bookings() {
    
@@ -59,6 +72,8 @@ function Bookings() {
     },[fetchbookings]);
   
     var history = useHistory()
+    const defaultMaterialTheme = createTheme();
+
 
     var renderTableHeader =()=> {
         let header =[
@@ -102,26 +117,26 @@ function Bookings() {
 
     
         
-        <div className="container">
+        // <div className="container">
             
-            <h4 style={{"textAlign":"left","color":""}}><FaHotel />  Reservation Details</h4>
+        //     <h4 style={{"textAlign":"left","color":""}}><FaHotel />  Reservation Details</h4>
 
-            <div className="table">
-            <div className="table-header">
-               {renderTableHeader()}
-            </div>
+        //     <div className="table">
+        //     <div className="table-header">
+        //        {renderTableHeader()}
+        //     </div>
 
-            <div className="table-content">
+        //     <div className="table-content">
           
          
-                   {
-                       renderTable()
-                   }  
+        //            {
+        //                renderTable()
+        //            }  
                  
-            </div>
+        //     </div>
                 
              
-            </div>
+        //     </div>
            
 
          
@@ -132,25 +147,76 @@ function Bookings() {
                  
                 
                  
-              {/* {
-                  book_details?.map((item)=>(
-                            <div className="data">
-                       <p>RoomId : {item.room_id} </p>
-                       <p>Bookingdate : {item.booking_date} </p>
-                       <p>Start Date : {item.start_date} </p>
-                       <p>End Date : {item.end_date} </p>
-                       <p>Amount : {item.amount} </p>
-                            </div>
-                  ))
-                     
-                } */}
+             
              
           
              
           
             
        
-        </div>
+        // </div>
+
+
+        <div className='table-container'>
+        
+<Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          </Typography>
+          {/* <Button onClick={()=>{history.push(`/hotel_add` )}} color="inherit">Add Hotel</Button> */}
+        </Toolbar>
+      </AppBar>
+    </Box>
+<>
+
+<ThemeProvider theme={defaultMaterialTheme}>
+
+<MaterialTable
+      icons={tableIcons}      
+      title="Booking Details"
+      columns={[
+        { title: 'Booking ID', field: 'r_id',editable: "never", },
+        { title: 'Booking Date', field: 'booking_date',editable: "never", },
+        { title: 'Customer Name', field: 'cust_name',editable: "never", },
+        { title: 'Cust. Phone', field: 'cust_phone',editable: "never", },
+        { title: 'Cust. Email', field: 'cust_email',editable: "never", },
+        { title: 'Amount', field: 'amount',editable: "never",  },     
+        { title: 'Ext. Matress', field: 'extra_matress',editable: "never", },     
+        { title: 'Start Date',field: 'start_date',editable: "never",  },     
+        { title: 'End Date', field: 'end_date',editable: "never",  },     
+
+        // {title: 'Action',
+        // render: rowData => (        
+        //     <VisibilityIcon onClick={()=>{history.push(`/hotel_details/${rowData.hotel_id}` , {state : {hotel_id  : rowData.hotel_id}})}} style={{cursor:"pointer"}} />
+        // ),},      
+        
+      ]}
+      data={booking_details}
+        options={{
+                selection: false,
+                textAlign: "center",
+                headerStyle: { textAlign: "left" },
+                rowStyle: { textAlign: "center" }
+              }}
+
+    />
+
+    </ThemeProvider>
+
+
+</>
+         
+</div>     
+                
     )
 }
 

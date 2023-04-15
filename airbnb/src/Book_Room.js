@@ -138,7 +138,7 @@ const days = (date_1, date_2) =>{
                      
                  </tr>
              </table>
-             <button onClick={add} className="button" ><Link to="/edituser" style={{textDecration:"none",color:"white"}}>  Edit </Link></button>
+             <button onClick={add} className="button" ><Link to="/edituser" style={{textDecration:"none",color:"white"}}>  Add </Link></button>
           
             
        

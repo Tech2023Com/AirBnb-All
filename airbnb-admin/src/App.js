@@ -17,6 +17,7 @@ const EditRoomPrice = React.lazy(()=>import('./EditRoomPrice'));
 const Hoteldetails = React.lazy(()=>import('./Hoteldetails'));
 const HotelList =  React.lazy(()=>import('./Hotels_List'))
 const HotelAdd =  React.lazy(()=>import('./Add_Hotel'))
+const RoomsList = React.lazy(()=> import('./Rooms_list'))
 
 function App() {
   const [{admin}, dispatch] = useStateValue();
@@ -38,6 +39,7 @@ function App() {
           <Route path="/edithotel/:id"><Edithotel /></Route>
 
           <Route path="/bookings"> <Header /> <Bookings /> <Footer /></Route>
+          <Route path="/room-list"> <Header /> <RoomsList/> <Footer /></Route>
 
 
           <Route path="/addDetails/:id"><Header /><AddDetails /><Footer /></Route>

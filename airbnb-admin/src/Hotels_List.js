@@ -7,13 +7,30 @@ import {BsFillPersonFill} from "react-icons/bs"
 import {MdEmail,MdEdit} from "react-icons/md"
 import {FaHotel} from "react-icons/fa"
 import axios from "axios"
+import tableIcons from './Config/IconsFile'
+
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import AccountBalance from '@mui/icons-material/AccountBalance';
+
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+
 
 import { useStateValue } from './StateProvider';
 import { Link, useHistory  } from "react-router-dom";
+import MaterialTable from 'material-table';
+import {ThemeProvider , createTheme} from '@mui/material'
 
 
 
 function Bookings() {
+    const defaultMaterialTheme = createTheme();
+
  
    
     var [hotel_details,setHotels]=useState([]);
@@ -86,31 +103,65 @@ function Bookings() {
 
     
         
-        <div className="container">
-                            <button className="button" style={{"backgroundColor":"orange","border":"none","padding":"10px 20px" , width : '50%' , borderRadius:'10px'}} onClick={()=>{history.push(`/hotel_add` )}}>Add New Hotel</button>
+        
+<div className='table-container'>
+        
+<Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          </Typography>
+          <Button onClick={()=>{history.push(`/hotel_add` )}} color="inherit">Add Hotel</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+<>
 
-            <h4 style={{"textAlign":"left","color":""}}><FaHotel />  Added Hotel Details</h4>
+<ThemeProvider theme={defaultMaterialTheme}>
 
-            <div className="table">
-            <div className="table-header">
-               {renderTableHeader()}
-            </div>
+<MaterialTable
+      icons={tableIcons}      
+      title="Added Hotles"
+      columns={[
+        { title: 'ID', field: 'hotel_id',editable: "never", },
+        { title: 'Hotel Name', field: 'hotel_name',editable: "never", },     
+        { title: 'Address', field: 'hotel_addr',editable: "never", },     
+        { title: 'Phone', field: 'hotel_phone',editable: "never", },     
+        { title: 'Email', field: 'hotel_email',editable: "never", },
+        {title: 'View Hotel',
+        render: rowData => (        
+            <VisibilityIcon onClick={()=>{history.push(`/hotel_details/${rowData.hotel_id}` , {state : {hotel_id  : rowData.hotel_id}})}} style={{cursor:"pointer"}} />
+        ),},      
+        {title: 'View Hotel Rooms',
+        render: rowData => (        
+            <AccountBalance onClick={()=>{history.push(`/room-list/${rowData.hotel_id}` , {state : {hotel_id  : rowData.hotel_id}})}} style={{cursor:"pointer"}} />
+        ),},      
+        
+      ]}
+      data={hotel_details}
+        options={{
+                selection: false,
+                textAlign: "center",
+                headerStyle: { textAlign: "left" },
+                rowStyle: { textAlign: "center" }
+              }}
 
-            <div className="table-content">
-          
+    />
+
+    </ThemeProvider>
+
+
+</>
          
-                   {
-                       renderTable()
-                   }  
-                 
-            </div>
-                
-             
-            </div>
-           
-
-         
-            
+</div>     
                 
             
            
@@ -122,7 +173,7 @@ function Bookings() {
           
             
        
-        </div>
+        // </div>
     )
 }
 

@@ -32,11 +32,11 @@ var logout = ()=>{
             <Link to="/">
             <img src="https://i.pinimg.com/originals/3c/bf/be/3cbfbe148597341fa56f2f87ade90956.png" className="header_icon"></img>
             </Link>
-            <div className="header_center">
+            {/* <div className="header_center">
             <SearchIcon />
                 <input   className="input"  placeholder=" Search for best Hotels"/>
                
-            </div>
+            </div> */}
 
             <div className="header_right">
               <div className="item " onClick={()=>{history.push("/hotel_list")}}>
