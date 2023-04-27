@@ -4,15 +4,18 @@ import {IoIosArrowForward} from "react-icons/io"
 // import Card from "./Card";
 import "./Card.css";
 import axios from "axios"
-import { useHistory } from 'react-router-dom';
+import { useHistory  , useLocation} from 'react-router-dom';
 
 import { useStateValue } from './StateProvider';
+
 // import { actionTypes } from './reducer';
 function Order(){
 
     const [{currentBooking,token}] = useStateValue();
+    const {state} = useLocation();
     const [disable, setDisable] = useState('False');
     const [cardNum, setcardNum] = useState("");
+    console.log(state)
 
 
     const ToogleDisable = ()=>{
@@ -32,14 +35,17 @@ const history = useHistory();
       if(res){
         //   console.log("success");
 
-        axios.post("http://localhost:8000/reservation",{
-            data:{"roomId":parseInt(currentBooking.roomId),
-            "custId":currentBooking.custId,
-            "bookingDate":currentBooking.bookingDate,
-            "startDate":currentBooking.startDate,
-            "endDate":currentBooking.endDate,
-            "amount":currentBooking.amount}
-        },{headers:{
+        var data = {"roomId":state.state.roomId,
+        "custId":state.state.custId,
+        "bookingDate":state.state.bookingDate,
+        "startDate":state.state.startDate,
+        "endDate":state.state.endDate,
+        "amount":state.state.amount,
+        "extra_matress" :state.state.extra_matress
+    }
+
+        axios.post("http://localhost:8000/reservation",
+            data,{headers:{
             Authorization:"Bearer "+token
         }})
         .then(result=>{
@@ -67,12 +73,13 @@ const history = useHistory();
                 <div className='card'>
                     {/* <img src={currentBooking.img} alt="" /> */}
                     <div className="card__info">
-                        <h2>{currentBooking.title}</h2>
-                        <h3>{currentBooking.desc}</h3>
-                        <h3>Start Date : {currentBooking.startDate}</h3>
-                        <h3>End Date : {currentBooking.endDate}</h3>
+                        <h2>{state.state.data && state.state.data.faci_list ? state.state.data.faci_list   :""}</h2>
+                        <h3>Room Cost : {  state.state.amount ? state.state.amount  : 0 } <span style={{color:"red"}}>(*** Exta Matress Cost : {parseInt(state.state.extra_matress) * 200 })
+ </span> </h3>
+                        <h3>Start Date : {state.state.startDate}</h3>
+                        <h3>End Date : {state.state.endDate}</h3>
 
-                        <h3>Total : {currentBooking.amount}</h3>
+                        <h3>Total : {state.state.amount}</h3>
 
                     </div>
                 </div>

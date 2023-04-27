@@ -46,7 +46,7 @@ function App() {
               <Route path="/profile">{isAuth ? ( <div><Header /><Profile />      <Footer /></div>) : ( <Redirect to="login" />) }</Route>
               <Route path="/bookings">{isAuth ? ( <div><Header /><Bookings />       <Footer /></div>) : ( <Redirect to="login" />) }</Route>
               <Route path="/bookroom/:id">{isAuth ? ( <div><Header /><BookRoom />       <Footer /></div>) : ( <Redirect to="login" />) }</Route>
-              <Route path="/checkout" ><Header />       <Order />      <Footer /></Route>
+              <Route path="/checkout/:id" ><Header />       <Order />      <Footer /></Route>
               <Route path="/room_list" ><Header />       <RoomList />      <Footer /></Route>
               <Route path="/" exact><Header />       <Home />      <Footer /></Route>
         

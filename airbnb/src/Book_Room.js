@@ -6,11 +6,12 @@ import {MdEmail,MdEdit} from "react-icons/md"
 import axios from 'axios'
 
 import { useStateValue } from './StateProvider';
-import { Link , useLocation} from "react-router-dom";
+import { Link , useLocation , useHistory} from "react-router-dom";
 
 
 
 function Profile() {
+    const history = useHistory();
 
 
     const {state} = useLocation();
@@ -44,18 +45,26 @@ return formattedToday;
 
 
     async function add(){
-        var data   = {
-           roomId : state.state.data.room_id, 
-           custId  :localStorage.getItem('userId'),
-           bookingDate  :bkd,
-           startDate  :sd, 
-           endDate : ed,
-           amount : state.state.total_cost +  parseInt(extm) * 200,
-           extra_matress :extm
-          }
-          console.log(data)
-          var request = await axios.post(postUrl,data);
-            alert(request.data)
+
+        history.push(`/checkout/${state.state.data.room_id}` , {state : {...state , roomId : state.state.data.room_id, 
+               custId  :localStorage.getItem('userId'),
+               bookingDate  :bkd,
+               startDate  :sd, 
+               endDate : ed,
+               amount : state.state.total_cost +  parseInt(extm) * 200,
+               extra_matress :extm }})
+        // var data   = {
+        //    roomId : state.state.data.room_id, 
+        //    custId  :localStorage.getItem('userId'),
+        //    bookingDate  :bkd,
+        //    startDate  :sd, 
+        //    endDate : ed,
+        //    amount : state.state.total_cost +  parseInt(extm) * 200,
+        //    extra_matress :extm
+        //   }
+        //   console.log(data)
+        //   var request = await axios.post(postUrl,data);
+        //     alert(request.data)
     }
 
 
@@ -138,7 +147,7 @@ const days = (date_1, date_2) =>{
                      
                  </tr>
              </table>
-             <button onClick={add} className="button" ><Link to="/edituser" style={{textDecration:"none",color:"white"}}>  Add </Link></button>
+             <button onClick={add} className="button" >  Add </button>
           
             
        
